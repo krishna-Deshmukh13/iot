@@ -1,0 +1,54 @@
+(* rgb  *)
+
+// Practical 5
+
+// Pin definitions
+int greenLED = 2;
+int yellowLED = 3;
+int redLED = 4;
+
+void setup() {
+  pinMode(greenLED, OUTPUT);
+  pinMode(yellowLED, OUTPUT);
+  pinMode(redLED, OUTPUT);
+  
+  // Start serial communication
+  Serial.begin(9600); 
+  Serial.println("Enter: b=blink green, g=green, y=yellow, r=red");
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    char input = Serial.read();
+    
+    // Turn OFF all LEDs before new command
+    digitalWrite(greenLED, LOW);
+    digitalWrite(yellowLED, LOW);
+    digitalWrite(redLED, LOW);
+
+    if (input == 'b') {
+      Serial.println("Blinking green light...");
+      for (int i = 0; i < 5; i++) {
+        digitalWrite(greenLED, HIGH);
+        delay(300);
+        digitalWrite(greenLED, LOW);
+        delay(300);
+      }
+    } 
+    else if (input == 'g') {
+      Serial.println("Green light ON");
+      digitalWrite(greenLED, HIGH);
+    } 
+    else if (input == 'y') {
+      Serial.println("Yellow light ON");
+      digitalWrite(yellowLED, HIGH);
+    } 
+    else if (input == 'r') {
+      Serial.println("Red light ON");
+      digitalWrite(redLED, HIGH);
+    } 
+    else {
+      Serial.println("Invalid input! Use b/g/y/r!");
+    }
+  }
+}
