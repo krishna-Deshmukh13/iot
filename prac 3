@@ -43,3 +43,8 @@ void loop()
     delay(1000); 
   }
 }
+tone() :
+use to produce sound wave of specific frequency use with pin 3 and 11 on all arduino 
+
+noTone() :
+stop the sound wave prouced by the the tone()
