@@ -1,0 +1,19 @@
+// led Blinking 
+
+
+void setup() {
+pinMode(7,OUTPUT);
+}
+
+void loop() {
+digitalWrite(7, HIGH);
+delay(1000);
+digitalWrite(2, LOW);
+delay(1000);
+}
+
+
+ 1) pinMode(pinno, input/ output) : use to set up pin 
+ 2) analogWrite() : use to generate signals on specific pin
+ 3) digitalWrite() : use to write high or low voltage
+ 
