@@ -1,0 +1,38 @@
+// Practical 7
+
+// Pin connections (Analog Input for Potentiometers)
+int potRed = A0;
+int potGreen = A1;
+int potBlue = A2;
+
+// Pin connections (Digital Output for RGB LED - must be PWM pins)
+int redLED = 9;
+int greenLED = 10;
+int blueLED = 11;
+
+void setup() {
+  // Set the LED pins as outputs
+  pinMode(redLED, OUTPUT);
+  pinMode(greenLED, OUTPUT);
+  pinMode(blueLED, OUTPUT);
+}
+
+void loop() {
+  // Read analog values from potentiometers (0 to 1023)
+  int redValue = analogRead(potRed);
+  int greenValue = analogRead(potGreen);
+  int blueValue = analogRead(potBlue);
+
+  // Map 10-bit analog values (0-1023) to 8-bit PWM values (0-255)
+  redValue = map(redValue, 0, 1023, 0, 255);
+  greenValue = map(greenValue, 0, 1023, 0, 255);
+  blueValue = map(blueValue, 0, 1023, 0, 255);
+
+  // Control RGB LED color using Analog Write (PWM)
+  analogWrite(redLED, redValue);
+  analogWrite(greenLED, greenValue);
+  analogWrite(blueLED, blueValue);
+
+  // Small delay for stability
+  delay(10); 
+}
