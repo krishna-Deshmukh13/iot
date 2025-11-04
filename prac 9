@@ -1,0 +1,52 @@
+// Practical No. 9
+
+float temp;
+float tempC = 0;
+float tempF = 0;
+int buzzer = 11;
+
+void setup() {
+  pinMode(A0, INPUT);
+  pinMode(buzzer, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  temp = analogRead(A0);
+  
+  // Convert raw analog reading to Celsius
+  // Note: This conversion formula might be simplified or specific to a certain sensor setup.
+  tempC = (temp * 5 / 1024);
+  tempC = ((tempC - 0.5) * 100);
+  
+  // Convert Celsius to Fahrenheit
+  tempF = ((tempC * 9 / 5) + 32);
+  
+  Serial.print("Temperature = ");
+  Serial.print(tempC);
+  Serial.print(" °C");
+  Serial.print(" ");
+  Serial.print(tempF);
+  Serial.println(" °F");
+  
+  // --- Buzzer Logic ---
+
+  if (tempC <= 30) {
+    noTone(buzzer);
+    delay(1000);
+  }
+  
+  if (tempC >= 30 && tempC <= 31) {
+    noTone(buzzer);
+    delay(1000);
+  }
+  
+  if (tempC > 32) {
+    tone(buzzer, 1000); // 1000 Hz tone
+    delay(200);
+    noTone(buzzer);
+    delay(200);
+  } 
+  
+  delay(1000); // Wait 1 second before next reading
+}
