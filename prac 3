@@ -1,0 +1,45 @@
+/*
+ * Write an application to read temperature from the environment. 
+ * If temperature crosses threshold value then it notifies with buzzer.
+ */
+
+
+float temp;
+float tempC = 0;
+float tempF = 0;
+int buzzer = 11;
+void setup()
+{
+  pinMode(A0, INPUT);
+  pinMode(buzzer, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  float analogVal = analogRead(A0);
+  
+  
+  temp = (analogVal * 5.0) / 1024.0; // 'temp' now holds the voltage
+  
+  tempC = temp * 100.0;
+  
+  tempF = (tempC * 9.0 / 5.0) + 32.0;
+  
+  Serial.print("Temperature = ");
+  Serial.print(tempC);
+  Serial.print(" °C, ");
+  Serial.print(tempF);
+  Serial.println(" °F");
+  
+  if (tempC > 30.0) 
+  {
+    tone(buzzer, 1000); 
+    delay(200); 
+  }
+  else 
+  {
+    noTone(buzzer);
+    delay(1000); 
+  }
+}
