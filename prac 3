@@ -4,10 +4,12 @@
  */
 
 
+
 float temp;
-float tempC = 0;
-float tempF = 0;
-int buzzer = 11;
+float voltage;
+float tempc = 0;
+float tempf = 0;
+int buzzer = 7;
 void setup()
 {
   pinMode(A0, INPUT);
@@ -17,31 +19,22 @@ void setup()
 
 void loop()
 {
-  float analogVal = analogRead(A0);
+  temp = analogRead(A0);
+  voltage = ((temp *5)/1024);
+  tempc = (voltage - 0.5) * 100;
+  tempf = (tempc *9 / 5) + 32;
+  Serial.println("Temprature: ");
+  Serial.println(tempc);
+  Serial.println(tempf);
   
-  
-  temp = (analogVal * 5.0) / 1024.0; // 'temp' now holds the voltage
-  
-  tempC = temp * 100.0;
-  
-  tempF = (tempC * 9.0 / 5.0) + 32.0;
-  
-  Serial.print("Temperature = ");
-  Serial.print(tempC);
-  Serial.print(" °C, ");
-  Serial.print(tempF);
-  Serial.println(" °F");
-  
-  if (tempC > 30.0) 
-  {
-    tone(buzzer, 1000); 
-    delay(200); 
+  if(tempc > 23){
+    tone(7,1000);
   }
-  else 
-  {
-    noTone(buzzer);
-    delay(1000); 
+  else {
+    noTone(7);
   }
+  delay(200);
+  
 }
 tone() :
 use to produce sound wave of specific frequency use with pin 3 and 11 on all arduino 
